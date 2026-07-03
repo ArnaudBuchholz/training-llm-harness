@@ -1,0 +1,31 @@
+{
+  "name": "training-llm-harness",
+  "version": "1.0.0",
+  "description": "Experimenting custom harness with LLMs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArnaudBuchholz/training-llm-harness.git"
+  },
+  "keywords": [],
+  "author": "Arnaud Buchholz <arnaud.buchholz@free.fr>",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ArnaudBuchholz/training-llm-harness/issues"
+  },
+  "homepage": "https://github.com/ArnaudBuchholz/training-llm-harness#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "openai": "^6.45.0",
+    "tsx": "^4.22.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
