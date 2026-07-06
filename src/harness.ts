@@ -49,6 +49,9 @@ const openaiTools: OpenAI.Chat.ChatCompletionTool[] = TOOLS.map((tool) => ({
   },
 }));
 
+const gray = (s: string) => `\x1b[90m${s}\x1b[0m`;
+const yellow = (s: string) => `\x1b[33m${s}\x1b[0m`;
+
 const rl = createInterface({ input: process.stdin, output: process.stdout });
 
 console.log(`Provider: ${PROVIDER.name}  Model: ${PROVIDER.model}`);
@@ -57,7 +60,7 @@ console.log(`Session traces: ${sessionDir}`);
 console.log('Type a message or "exit" to quit.\n');
 
 while (true) {
-  const input = (await rl.question('You: ')).trim();
+  const input = (await rl.question(yellow('You: '))).trim();
   if (!input) continue;
   if (input.toLowerCase() === 'exit') break;
 
@@ -88,20 +91,22 @@ while (true) {
     if (choice.finish_reason === 'tool_calls' && choice.message.tool_calls) {
       for (const call of choice.message.tool_calls) {
         const args = JSON.parse(call.function.arguments) as Record<string, unknown>;
-        process.stdout.write(`[tool] ${call.function.name}(${call.function.arguments})\n`);
+        process.stdout.write(gray(`[tool] ${call.function.name}(${call.function.arguments})\n`));
         const result = await executeTool(call.function.name, args);
-        process.stdout.write(`[tool result] ${result}\n`);
+        process.stdout.write(gray(`[tool result] ${result}\n`));
         history.push({ role: 'tool', tool_call_id: call.id, content: result });
       }
       continue; // send tool results back to the model
     }
 
     // Final text response
-    console.log(`\nAssistant: ${choice.message.content ?? ''}`);
+    console.log(`\n${yellow('Assistant:')} ${choice.message.content ?? ''}`);
     console.log(
-      `\n[tokens] turn — in: ${String(usage?.prompt_tokens ?? '?')}, out: ${String(usage?.completion_tokens ?? '?')}` +
-      ` | session total — in: ${String(totalInputTokens)}, out: ${String(totalOutputTokens)}` +
-      ` | history est.: ~${String(estimateHistoryTokens(history))} tokens\n`,
+      gray(
+        `\n[tokens] turn — in: ${String(usage?.prompt_tokens ?? '?')}, out: ${String(usage?.completion_tokens ?? '?')}` +
+        ` | session total — in: ${String(totalInputTokens)}, out: ${String(totalOutputTokens)}` +
+        ` | history est.: ~${String(estimateHistoryTokens(history))} tokens\n`,
+      ),
     );
     break;
   }
