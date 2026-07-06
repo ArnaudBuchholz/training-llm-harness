@@ -42,7 +42,11 @@ const history: OpenAI.Chat.ChatCompletionMessageParam[] = [];
 
 const openaiTools: OpenAI.Chat.ChatCompletionTool[] = TOOLS.map((tool) => ({
   type: 'function' as const,
-  function: { name: tool.name, description: tool.description, parameters: tool.parameters },
+  function: {
+    name: tool.name,
+    description: tool.description,
+    parameters: { type: 'object', properties: tool.parameters },
+  },
 }));
 
 const rl = createInterface({ input: process.stdin, output: process.stdout });
