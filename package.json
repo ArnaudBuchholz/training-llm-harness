@@ -4,7 +4,8 @@
   "description": "Experimenting custom harness with LLMs",
   "main": "index.js",
   "scripts": {
-    "pirate": "SCENARIO=pirate tsx src/harness.ts"
+    "pirate": "SCENARIO=pirate tsx src/harness.ts",
+    "agenda": "SCENARIO=agenda tsx src/harness.ts"
   },
   "repository": {
     "type": "git",
