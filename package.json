@@ -4,7 +4,7 @@
   "description": "Experimenting custom harness with LLMs",
   "main": "index.js",
   "scripts": {
-    "pirate": "SYSTEM_PROMPT=\"You are a pirate.\" tsx src/harness.ts"
+    "pirate": "SCENARIO=pirate tsx src/harness.ts"
   },
   "repository": {
     "type": "git",
