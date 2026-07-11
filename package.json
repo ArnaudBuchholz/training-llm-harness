@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "pirate": "SCENARIO=pirate tsx src/harness.ts",
-    "agenda": "SCENARIO=agenda tsx src/harness.ts"
+    "agenda": "SCENARIO=agenda tsx src/harness.ts",
+    "coding": "SCENARIO=coding tsx src/harness.ts"
   },
   "repository": {
     "type": "git",
